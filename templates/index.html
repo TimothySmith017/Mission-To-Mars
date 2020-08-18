@@ -23,7 +23,9 @@
         <div class="col-md-12">
           <div class="media">
             <div class="media-body">
-              <h2>Latest Mars News</h2>
+              <div class ="alert alert-success" role="alert">
+              <h2 class = "alert-heading">Latest Mars News</h2>
+            </div>
               <h4 class="media-heading">{{ mars.news_title }}</h4>
               <p>{{ mars.news_paragraph }}</p>
             </div>
@@ -44,7 +46,9 @@
         <div class="col-md-4">
           <!-- Mars Facts -->
           <div class="row" id="mars-facts">
-            <h4>Mars Facts</h4>
+            <div class ="alert alert-danger" role="alert">
+            <h4 class = "alert-heading">Mars Facts</h4>
+          </div>
             {{ mars.facts | safe }}
           </div>
         </div>
@@ -52,7 +56,7 @@
       <div class="col-md-4">
         <!-- Hemisphere Thumbnails -->
         <div class="row">
-          <div class="alert alert-warning" role="alert">
+          <div class="alert alert-danger" role="alert">
             <h4 class="alert-heading">Mars Hemispheres</h4>
           </div>
           <div id="cerberus_image">
@@ -91,12 +95,22 @@
           </div>
         </div>
     </div>
-    <div class="col-md-4">
-      <div class = "row">
-        <div class="alert alert-primary" role="alert">
-          <h4 class="alert-heading">More Info</h4>
-          <p>Want to see more about the Mars Hemispheres?  <a href="https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars" class="alert-link">Check it out HERE</a>
-          </p>
+    <br>
+    <div class="col-md-11">
+      <!-- More Info about Mars and the Solar System! -->
+      <div class="row" id="web-links">
+        <div class="alert alert-info" role="alert">
+          <h3 class="alert-heading"> Now's a great chance to learn more about Mars!</h3>
+          <br>
+          <p>Go NOW to the <a href="https://space-facts.com/mars/" class="alert-link">Mars Facts Website</a> For cool facts about our martian planet.</p>
+          <br>
+          <p> <a href="https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars" class="alert-link">Learn more about the Mars Hemispheres here!</a></p>
+          <br>
+          <p>Want more images of space in general?<a href="https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars" class="alert-link">Check them out here at NASA's Website!</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
       </div>
   </div>
 </body>
