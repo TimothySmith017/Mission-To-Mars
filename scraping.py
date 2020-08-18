@@ -15,18 +15,17 @@ def scrape_all():
         "news_title": news_title,
         "news_paragraph": news_paragraph,
         "featured_image": featured_image(browser),
+        "cerberus_image": cerberus_image(browser),
+        "schiaparelli_image": schiaparelli_image(browser),
+        "syrtis_major_image": syrtis_major_image(browser),
+        "valles_marineris_image": valles_marineris_image(browser),
         "facts": mars_facts(),
         "last_modified": dt.datetime.now()
     }
-
+    
     # Stop webdriver and return data
     browser.quit()
     return data
-
-## Set the executable path and enable chromedriver
-#executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
-#browser = Browser('chrome',**executable_path)
-
 
 def mars_news(browser):
     # Visit the mars nasa news site
@@ -87,6 +86,117 @@ def featured_image(browser):
 
     return img_url
 
+#CHALLENGE BEGINS HERE:
+def cerberus_image(browser):
+    # Visit URL
+    url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
+    browser.visit(url)
+
+    # Find the Image for Cerberus and click on it.
+    browser.is_element_present_by_text('Cerberus Hemisphere Enhanced')
+    image_elem = browser.links.find_by_partial_text('Cerberus Hemisphere Enhanced')
+    image_elem.click()
+
+    # Parse the resulting html with soup
+    html = browser.html
+    img_soup = soup(html, 'html.parser')
+
+    #Add try/except for error handling
+    try:
+        # Find the relative image url
+        img_url_rel = img_soup.select_one('div.downloads img').get("src")
+
+    except AttributeError:
+        return None
+
+    # Use the base url to create an absolute url
+    img_url = f'https://astrogeology.usgs.gov{img_url_rel}'
+    
+    return img_url
+
+# CHALLENGE: Get the next Image
+def schiaparelli_image(browser):
+    # Visit URL
+    url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
+    browser.visit(url)
+
+    # Find Schiaparelli Hemisphere full image
+    browser.is_element_present_by_text('Schiaparelli Hemisphere Enhanced', wait_time=1)
+    title_elem = browser.links.find_by_partial_text('Schiaparelli Hemisphere Enhanced')
+    title_elem.click()
+
+    # Parse the resulting html with soup
+    html = browser.html
+    img_soup = soup(html, 'html.parser')
+
+    # Add try/except for error handling
+    try:
+        # Find the relative image url
+        img_url_rel = img_soup.select_one('div.downloads img').get("src")
+
+    except AttributeError:
+        return None
+
+    # Use the base url to create an absolute url
+    img_url = f'https://astrogeology.usgs.gov{img_url_rel}'
+
+    return img_url
+
+def syrtis_major_image(browser):
+    # Visit URL
+    url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
+    browser.visit(url)
+
+    # Find Syrtis Major Hemisphere Enhanced and click that
+    browser.is_element_present_by_text('Syrtis Major Hemisphere Enhanced', wait_time=1)
+    image_elem = browser.links.find_by_partial_text('Syrtis Major Hemisphere Enhanced')
+    image_elem.click()
+
+    # Parse the resulting html with soup
+    html = browser.html
+    img_soup = soup(html, 'html.parser')
+
+    # Add try/except for error handling
+    try:
+        # Find the relative image url
+        img_url_rel = img_soup.select_one('div.downloads img').get("src")
+
+    except AttributeError:
+        return None
+
+    # Use the base url to create an absolute url
+    img_url = f'https://astrogeology.usgs.gov{img_url_rel}'
+
+    return img_url
+
+# Get the 
+def valles_marineris_image(browser):
+    # Visit URL
+    url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
+    browser.visit(url)
+
+    # Find Valles Marineris Hemisphere Enhanced and click that
+    browser.is_element_present_by_text('Valles Marineris Hemisphere Enhanced', wait_time=1)
+    image_elem = browser.links.find_by_partial_text('Valles Marineris Hemisphere Enhanced')
+    image_elem.click()
+
+    # Parse the resulting html with soup
+    html = browser.html
+    img_soup = soup(html, 'html.parser')
+
+    # Add try/except for error handling
+    try:
+        # Find the relative image url
+        img_url_rel = img_soup.select_one('div.downloads img').get("src")
+
+    except AttributeError:
+        return None
+
+    # Use the base url to create an absolute url
+    img_url = f'https://astrogeology.usgs.gov{img_url_rel}'
+
+    return img_url
+
     
 def mars_facts():
     # Add try/except for error handling
@@ -108,4 +218,3 @@ if __name__ == "__main__":
 
     # If running as script, print scraped data
     print(scrape_all())
-
