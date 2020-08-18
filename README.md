@@ -1,2 +1,2 @@
 # Mission-To-Mars
-![Portfolio](LineChart1.png)
+![Portfolio](/Images/portfolio.png)
